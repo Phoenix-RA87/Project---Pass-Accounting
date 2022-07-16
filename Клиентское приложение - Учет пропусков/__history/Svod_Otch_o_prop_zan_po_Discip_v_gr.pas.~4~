@@ -1,0 +1,34 @@
+unit Svod_Otch_o_prop_zan_po_Discip_v_gr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, StdCtrls, Buttons, jpeg, ExtCtrls;
+
+type
+  TFSvod_Otch_o_prop_zan_po_Discip_v_gr = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSvod_Otch_o_prop_zan_po_Discip_v_gr: TFSvod_Otch_o_prop_zan_po_Discip_v_gr;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,30 @@
+unit Glavnai_Avtorizacia;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg, StdCtrls, Mask;
+
+type
+  TFGlavnai_Avtorizacia = class(TForm)
+    Panel1: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    MaskEdit1: TMaskEdit;
+    Label2: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FGlavnai_Avtorizacia: TFGlavnai_Avtorizacia;
+
+implementation
+
+{$R *.dfm}
+
+end.

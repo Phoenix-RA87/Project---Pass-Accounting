@@ -1,0 +1,35 @@
+program Zavuch;
+
+uses
+  Forms,
+  FMenu in 'FMenu.pas' {FAvtorizacia},
+  VvodDiscipl in 'VvodDiscipl.pas' {FVvodDiscipl},
+  VvodSpec in 'VvodSpec.pas' {FVvodSprc},
+  VvodPrepod in 'VvodPrepod.pas' {FVvodPrepod},
+  VvodGrupp in 'VvodGrupp.pas' {FVvodGrupp},
+  VvodStud in 'VvodStud.pas' {FVvodStud},
+  DM in 'DM.pas' {FDM: TDataModule},
+  VvodNagruzki in 'VvodNagruzki.pas' {FVvodNagruzki},
+  Glavnai_Avtorizacia in 'Glavnai_Avtorizacia.pas' {FGlavnai_Avtorizacia},
+  MenuZamDirPoUMR in 'MenuZamDirPoUMR.pas' {FMenuZamDirPoUMR},
+  OtchZamDirPoUMR in 'OtchZamDirPoUMR.pas' {FOtchZamDirPoUMR},
+  Menu_Prepod in 'Menu_Prepod.pas' {FMenu_Prepod};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TFAvtorizacia, FAvtorizacia);
+  Application.CreateForm(TFVvodDiscipl, FVvodDiscipl);
+  Application.CreateForm(TFVvodSprc, FVvodSprc);
+  Application.CreateForm(TFVvodPrepod, FVvodPrepod);
+  Application.CreateForm(TFVvodGrupp, FVvodGrupp);
+  Application.CreateForm(TFVvodStud, FVvodStud);
+  Application.CreateForm(TFDM, FDM);
+  Application.CreateForm(TFVvodNagruzki, FVvodNagruzki);
+  Application.CreateForm(TFGlavnai_Avtorizacia, FGlavnai_Avtorizacia);
+  Application.CreateForm(TFMenuZamDirPoUMR, FMenuZamDirPoUMR);
+  Application.CreateForm(TFOtchZamDirPoUMR, FOtchZamDirPoUMR);
+  Application.CreateForm(TFMenu_Prepod, FMenu_Prepod);
+  Application.Run;
+end.

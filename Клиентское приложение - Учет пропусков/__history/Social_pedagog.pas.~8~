@@ -1,0 +1,33 @@
+unit Social_pedagog;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg;
+
+type
+  TFSocial_pedagog = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image1: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image2: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSocial_pedagog: TFSocial_pedagog;
+
+implementation
+
+uses DM, FMenu;
+
+{$R *.dfm}
+
+end.

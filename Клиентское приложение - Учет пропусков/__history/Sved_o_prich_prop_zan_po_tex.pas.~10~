@@ -1,0 +1,65 @@
+unit Sved_o_prich_prop_zan_po_tex;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, StdCtrls, Buttons, ExtCtrls, jpeg;
+
+type
+  TFSved_o_prich_prop_zan_po_tex = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    procedure DateTimePicker1Change(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure DateTimePicker2Change(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSved_o_prich_prop_zan_po_tex: TFSved_o_prich_prop_zan_po_tex;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TFSved_o_prich_prop_zan_po_tex.DateTimePicker1Change(Sender: TObject);
+begin
+DateTimePicker2Change(Self);
+end;
+
+procedure TFSved_o_prich_prop_zan_po_tex.DateTimePicker2Change(Sender: TObject);
+begin
+FDM.ADOQueryOtch.SQL.Text:= 'exec Sved_propusk_tehnikum' + QuotedStr(DateToStr(DateTimePicker1.date))+ ',' +QuotedStr(DateToStr(DateTimePicker2.date));
+FDM.ADOQueryOtch.Open;
+
+ DBGrid1.Columns.Items[0].Title.Caption :='№ п/п';
+  DBGrid1.Columns.Items[1].Title.Caption :='Группа';
+    DBGrid1.Columns.Items[2].Title.Caption :='Кол-во часов';
+//     DBGrid1.Columns.Items[3].Title.Caption :='По болезни';
+//      DBGrid1.Columns.Items[4].Title.Caption :='МСЭК';
+//       DBGrid1.Columns.Items[5].Title.Caption :='Заявление';
+//        DBGrid1.Columns.Items[6].Title.Caption :='Раз.админ';
+//         DBGrid1.Columns.Items[7].Title.Caption :='Другие причины';
+//          DBGrid1.Columns.Items[8].Title.Caption :='Прогулы';
+end;
+
+procedure TFSved_o_prich_prop_zan_po_tex.FormActivate(Sender: TObject);
+begin
+DateTimePicker1.Date:=date();
+DateTimePicker2.Date:=date();
+DateTimePicker2Change(Self);
+end;
+
+end.

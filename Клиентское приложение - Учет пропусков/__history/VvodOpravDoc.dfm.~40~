@@ -1,0 +1,213 @@
+object FVvodOpravDoc: TFVvodOpravDoc
+  Left = 0
+  Top = 0
+  Caption = #1054#1087#1088#1072#1074#1076#1072#1090#1077#1083#1100#1085#1099#1081' '#1076#1086#1082#1091#1084#1077#1085#1090
+  ClientHeight = 583
+  ClientWidth = 734
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -15
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 18
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 734
+    Height = 113
+    Align = alTop
+    Color = 8454143
+    TabOrder = 0
+  end
+  object Panel2: TPanel
+    Left = 576
+    Top = 113
+    Width = 158
+    Height = 470
+    Align = alRight
+    Color = 8421631
+    TabOrder = 1
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 113
+    Width = 577
+    Height = 216
+    Align = alCustom
+    Color = 8454016
+    TabOrder = 2
+    object Image1: TImage
+      Left = 1
+      Top = 1
+      Width = 575
+      Height = 214
+      Align = alClient
+      Stretch = True
+      ExplicitLeft = 57
+      ExplicitTop = -7
+    end
+    object Label1: TLabel
+      Left = 24
+      Top = 16
+      Width = 118
+      Height = 18
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1075#1088#1091#1087#1087#1091
+      Color = clWhite
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 200
+      Top = 16
+      Width = 135
+      Height = 18
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1089#1090#1091#1076#1077#1085#1090#1072
+      Color = clWhite
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 211
+      Top = 88
+      Width = 55
+      Height = 18
+      Caption = #1044#1072#1090#1072' '#1087#1086
+      Color = clWhite
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 40
+      Top = 88
+      Width = 46
+      Height = 18
+      Caption = #1044#1072#1090#1072' '#1089
+      Color = clWhite
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 352
+      Top = 88
+      Width = 128
+      Height = 18
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1088#1080#1095#1080#1085#1091
+      Color = clWhite
+      ParentColor = False
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 24
+      Top = 40
+      Width = 145
+      Height = 26
+      KeyField = 'N_Grupp'
+      ListField = 'Naim_grupp'
+      ListSource = FDM.DataSourceVvodGrupp
+      TabOrder = 0
+      OnClick = DBLookupComboBox1Click
+    end
+    object DateTimePicker1: TDateTimePicker
+      Left = 24
+      Top = 111
+      Width = 97
+      Height = 26
+      Date = 42468.407675289350000000
+      Time = 42468.407675289350000000
+      TabOrder = 1
+      OnChange = DateTimePicker1Change
+    end
+    object DateTimePicker2: TDateTimePicker
+      Left = 200
+      Top = 112
+      Width = 97
+      Height = 26
+      Date = 42468.407675289350000000
+      Time = 42468.407675289350000000
+      TabOrder = 2
+      OnChange = DateTimePicker1Change
+    end
+    object BitBtn1: TBitBtn
+      Left = 472
+      Top = 168
+      Width = 81
+      Height = 25
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      TabOrder = 3
+      OnClick = BitBtn1Click
+    end
+    object ComboBox1: TComboBox
+      Left = 352
+      Top = 112
+      Width = 145
+      Height = 26
+      ItemHeight = 18
+      TabOrder = 4
+      Items.Strings = (
+        #1055#1086' '#1073#1086#1083#1077#1079#1085#1080
+        #1052#1057#1069#1050
+        #1047#1072#1103#1074#1083#1077#1085#1080#1077
+        #1056#1072#1079'.'#1072#1076#1084#1080#1085#1080#1089#1090#1088#1072#1094#1080#1080
+        #1044#1088#1091#1075#1080#1077' '#1087#1088#1080#1095#1080#1085#1099)
+    end
+    object DBLookupComboBox2: TDBLookupComboBox
+      Left = 200
+      Top = 40
+      Width = 297
+      Height = 26
+      KeyField = 'N_Student'
+      ListField = 'FIO_Student'
+      ListSource = FDM.DataSourceVvodStud
+      TabOrder = 5
+      OnClick = DBLookupComboBox2Click
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 1
+    Top = 328
+    Width = 569
+    Height = 255
+    DataSource = FDM.DataSourceVvodProppusk
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -15
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'N_Propuska'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'N_Nagruzka'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'N_Student'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Data_I'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Prichina'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Progul_chasi'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Oprav_dok'
+        Visible = True
+      end>
+  end
+end

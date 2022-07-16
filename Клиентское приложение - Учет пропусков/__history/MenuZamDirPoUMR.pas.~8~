@@ -1,0 +1,32 @@
+unit MenuZamDirPoUMR;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg;
+
+type
+  TFMenuZamDirPoUMR = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image2: TImage;
+    Image1: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMenuZamDirPoUMR: TFMenuZamDirPoUMR;
+
+implementation
+
+{$R *.dfm}
+
+end.

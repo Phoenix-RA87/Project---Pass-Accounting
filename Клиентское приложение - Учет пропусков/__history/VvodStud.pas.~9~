@@ -1,0 +1,41 @@
+unit VvodStud;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ExtCtrls, jpeg, StdCtrls, DBCtrls;
+
+type
+  TFVvodStud = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label1: TLabel;
+    LabeledEdit3: TLabeledEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVvodStud: TFVvodStud;
+
+implementation
+
+uses DM, FMenu, VvodDiscipl, VvodGrupp, VvodPrepod, VvodSpec;
+
+{$R *.dfm}
+
+
+
+end.

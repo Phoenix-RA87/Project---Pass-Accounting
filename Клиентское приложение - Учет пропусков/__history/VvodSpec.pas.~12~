@@ -1,0 +1,48 @@
+unit VvodSpec;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, Grids, DBGrids, jpeg;
+
+type
+  TFVvodSprc = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    DBGrid1: TDBGrid;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
+    Image6: TImage;
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVvodSprc: TFVvodSprc;
+
+implementation
+
+uses DM, FMenu, VvodDiscipl, VvodGrupp, VvodPrepod, VvodStud;
+
+{$R *.dfm}
+
+procedure TFVvodSprc.FormActivate(Sender: TObject);
+begin
+FDM.ADOQueryVvodSpec.Active:=True;
+FDM.ADOQueryVvodSpec.Open;
+DBGrid1.Columns.Items[0].Title.Caption :='№ Специальности';
+DBGrid1.Columns.Items[1].Title.Caption :='Шифр';
+DBGrid1.Columns.Items[2].Title.Caption :='Название специальности'
+end;
+
+end.

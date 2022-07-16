@@ -1,0 +1,48 @@
+unit VvodNagruzki;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ExtCtrls, jpeg, StdCtrls, DBCtrls, Buttons;
+
+type
+  TFVvodNagruzki = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image6: TImage;
+    Image7: TImage;
+    Image5: TImage;
+    LabeledEdit1: TLabeledEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBLookupComboBox3: TDBLookupComboBox;
+    Label3: TLabel;
+    BitBtn3: TBitBtn;
+    BitBtn2: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVvodNagruzki: TFVvodNagruzki;
+
+implementation
+
+uses DM, FMenu, VvodDiscipl, VvodGrupp, VvodPrepod, VvodSpec, VvodStud;
+
+{$R *.dfm}
+
+
+
+end.

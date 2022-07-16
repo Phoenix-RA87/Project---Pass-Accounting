@@ -1,0 +1,179 @@
+unit Svod_Otch_o_prop_zan_po_Discip_v_gr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, StdCtrls, Buttons, jpeg, ExtCtrls,
+  excel2000,comobj,ShellApi,DBCtrls;
+
+type
+  TFSvod_Otch_o_prop_zan_po_Discip_v_gr = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    BitBtn2: TBitBtn;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label3: TLabel;
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DateTimePicker1Change(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSvod_Otch_o_prop_zan_po_Discip_v_gr: TFSvod_Otch_o_prop_zan_po_Discip_v_gr;
+       OE1,OList :Variant;
+     istr:integer;
+  s:string;
+  f:textfile;
+  
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TFSvod_Otch_o_prop_zan_po_Discip_v_gr.BitBtn1Click(Sender: TObject);
+begin
+
+OE1:=CreateOleObject('Excel.Application'); //СоздатьOLE-объект Excel
+OE1.WorkBooks.Add();                      // Создать рабочую книгу Excel
+OE1.Visible:=True;                         // Сделать Excel видимым
+//Занести в ячейку значение- напечатать заголовок отчета
+OE1.Cells[1,1].Value:='Сводный отчет о пропусках занятий по группе '+
+'За период'+' '+'c'+' '+DateToStr(DateTimePicker1.Date)+' '+'по'+' '+DateToStr(DateTimePicker2.Date);
+OE1.Cells[2,1].Value:='№ п/п';
+OE1.Cells[2,2].value:='ФИО Студента';
+OE1.Cells[2,3].Value:='Пропущено часов';
+OE1.Cells[2,4].Value:='Наименование дисциплины';
+OE1.Cells[2,5].Value:='Всего';
+
+
+
+istr:=3;                           // Номер
+fdm.ADOQueryOtch.First;               //Перейти на первую запись
+while not fdm.ADOQueryOtch.Eof do  // Пока не будет достигнут конец файла
+begin
+//Заносить в ячейку Excel содержимое полей
+
+OE1.Cells[istr,1].Value:=fdm.ADOQueryOtch.FieldByName('№_п/п').AsString;
+OE1.Cells[istr,2].Value:=fdm.ADOQueryOtch.FieldByName('ФИО_Студента').AsString;
+OE1.Cells[istr,3].Value:=fdm.ADOQueryOtch.FieldByName('Пропущено_часов').AsString;
+OE1.Cells[istr,4].Value:=fdm.ADOQueryOtch.FieldByName('Наименование_дисциплины').AsString;
+OE1.Cells[istr,5].Value:=fdm.ADOQueryOtch.FieldByName('Всего').AsString;
+
+
+//Перейти на следующую запись
+FDM.ADOQueryOtch.Next;
+////Увеличить номер строки   в Excel
+ istr:=istr+1;
+//
+end;
+//begin
+ //Дополнительные команды для форматирования
+OE1.Range['A3:H'+IntToStr(istr+1)].Select;   // Выделить ячейки
+//Обрамление сплошной линией всех выделенных ячеек
+     OE1.Selection.Borders[xlEdgeLeft].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeRight].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeTop].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeBottom].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlInsideVertical].LineStyle:=xlContinuous;
+ OE1.Selection.Borders[xlInsideHorizontal].LineStyle:=xlContinuous;
+   // OE1.Selection.MergeCells:=True;
+//OE1.Selection.HorizontalAlignment := xlLeft;
+    /// OE1.Selection.VerticalAlignment := xlCenter;
+     OE1.Range['A1:h'+inttostr(istr-1)].Select;
+OE1.Selection.ColumnWidth:=30;// Ширина столбца
+
+  // параметры печати - границы
+        OE1.ActiveSheet.PageSetup.LeftMargin:= 0.39;
+        OE1.ActiveSheet.PageSetup.RightMargin := 0.39;
+        OE1.ActiveSheet.PageSetup.TopMargin := 2.78;
+        OE1.ActiveSheet.PageSetup.BottomMargin := 0.78;
+  // параметры печати - ориентация
+        OE1.ActiveSheet.PageSetup.Orientation := xlLandscape;
+        OE1.ActiveSheet.PageSetup.Zoom := False ;
+// Расположить на 1 странице по ширине        OE1.ActiveSheet.PageSetup.FitToPagesWide := 1
+// Расположить на 10 страницах по высоте        OE1.ActiveSheet.PageSetup.FitToPagesTall := 10;
+//Правый колонтитул внизу
+OE1.ActiveSheet.PageSetup.RightFooter := DateToStr(Date) ;
+//Предварительный просмотр
+OE1.ActiveSheet.PrintPreview;
+end;
+
+procedure TFSvod_Otch_o_prop_zan_po_Discip_v_gr.BitBtn2Click(Sender: TObject);
+begin
+
+//// 1.открыть файл раширение html
+////2. вывести в файл информацию на языке html
+//закрыть файл
+//запустить файл
+
+ assignfile(f,extractfiledir(Application.ExeName)+'\Сводный отчет о пропусках занятий по группе.html');
+ReWrite(f);
+writeln(f,'<html>');
+writeln(f,'<head>');
+writeln(f,'<LINK  REL=STYLESHEET  TYPE=text/css HREF=table.css>');
+writeln(f,'</head>');
+writeln(f,'<body>');
+writeln(f,'<p></p>');
+writeln(f,'<table>');
+writeln(f,'<th>'+'№ п/п'+'</th>')  ;
+writeln(f,'<th>'+'ФИО студента'+'</th>');
+writeln(f,'<th>'+'Пропущено часов'+'</th>');
+writeln(f,'<th>'+'Наименование дисциплины'+'</th>');
+writeln(f,'<th>'+'Всего'+'</th>');
+fdm.ADOQueryOtch.First;               //Перейти на первую запись
+while not fdm.ADOQueryOtch.Eof do
+  begin
+writeln(f,'<tr>');
+writeln(f,'<td>'+fdm.ADOQueryOtch.FieldByName('№_п/п').AsString+ '</td>');
+writeln(f,'<td>'+fdm.ADOQueryOtch.FieldByName('ФИО_Студента').AsString+ '</td>');
+writeln(f,'<td>'+fdm.ADOQueryOtch.FieldByName('Пропущено_часов').AsString+ '</td>');
+writeln(f,'<td>'+fdm.ADOQueryOtch.FieldByName('Наименование_дисциплины').AsString+ '</td>');
+writeln(f,'<td>'+fdm.ADOQueryOtch.FieldByName('Всего').AsString+ '</td>');;
+writeln(f,'</tr>');
+FDM.ADOQueryOtch.Next;
+end;
+writeln(f,'</table>');
+writeln(f,'</body>');
+writeln(f,'</html>');
+closefile(f);
+shellexecute(Handle,'open',Pchar(extractfiledir(Application.ExeName)+'\Сводный отчет о пропусках занятий по группе.html'),nil,nil,SW_SHOWNORMAL);
+
+end;
+
+procedure TFSvod_Otch_o_prop_zan_po_Discip_v_gr.DateTimePicker1Change(
+  Sender: TObject);
+begin
+
+fdm.ADOQueryOtch.SQL.Text:='exec Svod_otchPoDiscip' +
+IntToStr(fdm.ADOQueryVvodGrupp.FieldByName('N_Grupp').Value)+','+
+QuotedStr(DateToStr(DateTimePicker1.date))+','+
+QuotedStr(DateToStr(DateTimePicker2.Date));
+fdm.ADOQueryOtch.Close;
+fdm.ADOQueryOtch.Open;
+// DBGrid1.Columns.Items[0].Title.Caption :='№ п/п';
+// DBGrid1.Columns.Items[1].Title.Caption :='Пропущено часов';
+// DBGrid1.Columns.Items[2].Title.Caption :='Наименование дисциплины';
+// DBGrid1.Columns.Items[3].Title.Caption :='Всего';
+end;
+
+procedure TFSvod_Otch_o_prop_zan_po_Discip_v_gr.FormActivate(Sender: TObject);
+begin
+DateTimePicker1.Date:=date;
+DateTimePicker2.Date:=date;
+fdm.ADOQueryVvodGrupp.Open;
+end;
+
+end.

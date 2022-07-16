@@ -1,0 +1,40 @@
+unit Menu_Prepod;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg, StdCtrls, Buttons;
+
+type
+  TFMenu_Prepod = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    GroupBox1: TGroupBox;
+    Image5: TImage;
+    BitBtn1: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMenu_Prepod: TFMenu_Prepod;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFMenu_Prepod.BitBtn1Click(Sender: TObject);
+begin
+Close();
+end;
+
+end.

@@ -1,0 +1,105 @@
+unit VvodOpravDoc;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ExtCtrls, ValEdit, DBCtrls, StdCtrls, Buttons,
+  ComCtrls;
+
+type
+  TFVvodOpravDoc = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    LabeledEdit2: TLabeledEdit;
+    BitBtn1: TBitBtn;
+    Label5: TLabel;
+    ComboBox1: TComboBox;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBGrid1: TDBGrid;
+    procedure DBLookupComboBox2Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DBLookupComboBox1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVvodOpravDoc: TFVvodOpravDoc;
+
+implementation
+
+uses DM, Social_pedagog;
+
+{$R *.dfm}
+
+procedure TFVvodOpravDoc.BitBtn1Click(Sender: TObject);
+//var i:integer;
+begin
+//i:=1;
+//FDM.ADOQueryVvodStud.First;
+//while not FDM.ADOQueryVvodStud.Eof do
+//begin
+//  if ValueListEditor1.Values[ValueListEditor1.Keys[i]]<>'' then
+  begin
+  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@N_Grupp').Value:=FDM.ADOQueryVvodGrupp.FieldByName('N_Grupp').AsString;
+  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@N_Student').Value:=FDM.ADOQueryVvodStud.FieldByName('N_Student').AsString;
+  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@Data_I').Value:= DateToStr(DateTimePicker1.Date);
+  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@Prichina').Value:= (ComboBox1.Text);
+  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@Oprav_dok').Value:= (ComboBox1.Text);
+//  FDM.ADOStoredProcVvodPropusk.Parameters.ParamByName('@Progul_chasi').Value:=ValueListEditor1.Values[ValueListEditor1.Keys[i]];
+//  ShowMessage('Добавлен оправдательный документ');
+//      end;
+//    FDM.ADOQueryVvodStud.Next;
+//    i:=i+1;
+
+end;
+
+FDM.ADOQueryVvodPropusk.Close;
+FDM.ADOQueryVvodPropusk.Open;
+end;
+//
+//
+procedure TFVvodOpravDoc.DBLookupComboBox1Click(Sender: TObject);
+begin
+FDM.ADOQueryVvodStud.SQL.Text:='Select * from Student where N_Grupp='+
+FDM.ADOQueryVvodGrupp.FieldByName('N_Grupp').AsString;
+FDM.ADOQueryVvodStud.Close;
+FDM.ADOQueryVvodStud.Open;
+end;
+
+procedure TFVvodOpravDoc.DBLookupComboBox2Click(Sender: TObject);
+var
+i:integer;
+begin
+FDM.ADOQueryVvodPropusk.SQL.Text:='Select Data_I, Progul_chasi from Propusk where N_Student='+
+FDM.ADOQueryVvodStud.FieldByName('N_Student').AsString + ' and Data_I<='+QuotedStr(DateToStr(DateTimePicker2.date)) + ' and Data_I>='+QuotedStr(DateToStr(DateTimePicker1.date));
+FDM.ADOQueryVvodPropusk.Close;
+FDM.ADOQueryVvodPropusk.Open;
+FDM.ADOQueryVvodPropusk.First;
+i:=1;
+//ValueListEditor1.Strings.Clear;
+//while NOT FDM.ADOQueryVvodPropusk.Eof  do
+//begin
+//  ValueListEditor1.Strings.Add('');
+//  ValueListEditor1.Keys[i]:=FDM.ADOQueryVvodPropusk.FieldByName('N_Propuska').AsString;
+//  ValueListEditor1.ItemProps[i-1].EditStyle:=esPickList;
+//  ValueListEditor1.ItemProps[i-1].PickList.Add('2');
+//  ValueListEditor1.ItemProps[i-1].PickList.Add('1');
+//  i:=i+1;
+//  FDM.ADOQueryVvodPropusk.Next;
+//end;
+end;
+
+end.

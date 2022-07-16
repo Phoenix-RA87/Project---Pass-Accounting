@@ -1,0 +1,146 @@
+unit Sved_o_prich_prop_zan_po_tex;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ComCtrls, StdCtrls, Buttons, ExtCtrls, jpeg,
+   excel2000,comobj,ShellApi;
+
+type
+  TFSved_o_prich_prop_zan_po_tex = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn1: TBitBtn;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    procedure DateTimePicker1Change(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure DateTimePicker2Change(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSved_o_prich_prop_zan_po_tex: TFSved_o_prich_prop_zan_po_tex;
+    OE1,OList :Variant;
+  istr:integer;
+  s:string;
+  f:textfile;
+
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TFSved_o_prich_prop_zan_po_tex.BitBtn1Click(Sender: TObject);
+begin
+
+OE1:=CreateOleObject('Excel.Application'); //СоздатьOLE-объект Excel
+OE1.WorkBooks.Add();                      // Создать рабочую книгу Excel
+OE1.Visible:=True;                         // Сделать Excel видимым
+//Занести в ячейку значение- напечатать заголовок отчета
+OE1.Cells[1,1].Value:='Сводный отчет о пропусках занятий по дисциплине '+
+'За период'+' '+'c'+' '+DateToStr(DateTimePicker1.Date)+' '+'по'+' '+DateToStr(DateTimePicker2.Date);
+OE1.Cells[2,2].Value:='Название групп';
+OE1.Cells[2,3].value:='Пропущено часов';
+OE1.Cells[2,4].Value:='По болезни';
+OE1.Cells[2,5].Value:='МСЭК';
+OE1.Cells[2,6].Value:='Заявление';
+OE1.Cells[2,7].Value:='С разрешени администратора';
+OE1.Cells[2,8].Value:='Другие причины';
+OE1.Cells[2,9].Value:='Прогулы';
+
+
+istr:=3;                           // Номер
+fdm.ADOQueryOtch.First;               //Перейти на первую запись
+while not fdm.ADOQueryOtch.Eof do  // Пока не будет достигнут конец файла
+begin
+//Заносить в ячейку Excel содержимое полей
+
+OE1.Cells[istr,2].Value:=fdm.ADOQueryOtch.FieldByName('Название_групп').AsString;
+OE1.Cells[istr,3].Value:=fdm.ADOQueryOtch.FieldByName('Пропущено_часов').AsString;
+OE1.Cells[istr,4].Value:=fdm.ADOQueryOtch.FieldByName('По_болезни').AsString;
+OE1.Cells[istr,5].Value:=fdm.ADOQueryOtch.FieldByName('МСЭК').AsString;
+OE1.Cells[istr,6].Value:=fdm.ADOQueryOtch.FieldByName('Заявление').AsString;
+OE1.Cells[istr,7].Value:=fdm.ADOQueryOtch.FieldByName('С_разрешени_администратора').AsString;
+OE1.Cells[istr,8].Value:=fdm.ADOQueryOtch.FieldByName('Другие_причины').AsString;
+OE1.Cells[istr,9].Value:=fdm.ADOQueryOtch.FieldByName('Прогулы').AsString;
+
+
+//Перейти на следующую запись
+FDM.ADOQueryOtch.Next;
+////Увеличить номер строки   в Excel
+ istr:=istr+1;
+//
+end;
+//begin
+ //Дополнительные команды для форматирования
+OE1.Range['A3:H'+IntToStr(istr+1)].Select;   // Выделить ячейки
+//Обрамление сплошной линией всех выделенных ячеек
+     OE1.Selection.Borders[xlEdgeLeft].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeRight].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeTop].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlEdgeBottom].LineStyle:=xlContinuous;
+     OE1.Selection.Borders[xlInsideVertical].LineStyle:=xlContinuous;
+ OE1.Selection.Borders[xlInsideHorizontal].LineStyle:=xlContinuous;
+   // OE1.Selection.MergeCells:=True;
+//OE1.Selection.HorizontalAlignment := xlLeft;
+    /// OE1.Selection.VerticalAlignment := xlCenter;
+     OE1.Range['A1:E'+inttostr(istr-1)].Select;
+OE1.Selection.ColumnWidth:=30;// Ширина столбца
+
+  // параметры печати - границы
+        OE1.ActiveSheet.PageSetup.LeftMargin:= 0.39;
+        OE1.ActiveSheet.PageSetup.RightMargin := 0.39;
+        OE1.ActiveSheet.PageSetup.TopMargin := 2.78;
+        OE1.ActiveSheet.PageSetup.BottomMargin := 0.78;
+  // параметры печати - ориентация
+        OE1.ActiveSheet.PageSetup.Orientation := xlLandscape;
+        OE1.ActiveSheet.PageSetup.Zoom := False ;
+// Расположить на 1 странице по ширине        OE1.ActiveSheet.PageSetup.FitToPagesWide := 1
+// Расположить на 10 страницах по высоте        OE1.ActiveSheet.PageSetup.FitToPagesTall := 10;
+//Правый колонтитул внизу
+OE1.ActiveSheet.PageSetup.RightFooter := DateToStr(Date) ;
+//Предварительный просмотр
+OE1.ActiveSheet.PrintPreview;
+end;
+
+
+procedure TFSved_o_prich_prop_zan_po_tex.DateTimePicker1Change(Sender: TObject);
+begin
+DateTimePicker2Change(Self);
+end;
+
+procedure TFSved_o_prich_prop_zan_po_tex.DateTimePicker2Change(Sender: TObject);
+begin
+FDM.ADOQueryOtch.SQL.Text:= 'exec Sved_propusk_tehnikum' + QuotedStr(DateToStr(DateTimePicker1.date))+ ',' +QuotedStr(DateToStr(DateTimePicker2.date));
+FDM.ADOQueryOtch.Open;
+
+ DBGrid1.Columns.Items[0].Title.Caption :='№ п/п';
+  DBGrid1.Columns.Items[1].Title.Caption :='Группа';
+    DBGrid1.Columns.Items[2].Title.Caption :='Кол-во часов';
+     DBGrid1.Columns.Items[3].Title.Caption :='По болезни';
+      DBGrid1.Columns.Items[4].Title.Caption :='МСЭК';
+       DBGrid1.Columns.Items[5].Title.Caption :='Заявление';
+        DBGrid1.Columns.Items[6].Title.Caption :='Раз.админ';
+         DBGrid1.Columns.Items[7].Title.Caption :='Другие причины';
+
+end;
+
+procedure TFSved_o_prich_prop_zan_po_tex.FormActivate(Sender: TObject);
+begin
+DateTimePicker1.Date:=date();
+DateTimePicker2.Date:=date();
+DateTimePicker2Change(Self);
+end;
+
+end.

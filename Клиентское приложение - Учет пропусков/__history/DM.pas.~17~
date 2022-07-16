@@ -1,0 +1,64 @@
+unit DM;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB;
+
+type
+  TFDM = class(TDataModule)
+    DataSourceVvodSpec: TDataSource;
+    DataSourceVvodDiscipl: TDataSource;
+    DataSourceVvodPrepod: TDataSource;
+    DataSourceVvodGrupp: TDataSource;
+    DataSourceVvodStud: TDataSource;
+    ADOConnection1: TADOConnection;
+    ADOQueryVvodSpec: TADOQuery;
+    ADOQueryVvodDiscipl: TADOQuery;
+    ADOQueryVvodPrepod: TADOQuery;
+    ADOQueryVvodGrupp: TADOQuery;
+    ADOQueryVvodStud: TADOQuery;
+    ADOStoredProcVvodSpec: TADOStoredProc;
+    ADOStoredProcVvodPrepod: TADOStoredProc;
+    ADOStoredProcVvodGrupp: TADOStoredProc;
+    ADOQueryOtch: TADOQuery;
+    DataSourceOtch: TDataSource;
+    ADOStoredProcVVod_Discipl: TADOStoredProc;
+    ADOStoredProcVvodStud: TADOStoredProc;
+    ADOQueryIzmenSpec: TADOQuery;
+    DataSourceIzmenSpec: TDataSource;
+    ADOStoredProcIzmenSpec: TADOStoredProc;
+    ADOQueryIzmenDiscipl: TADOQuery;
+    DataSourceIzmenDiscipl: TDataSource;
+    ADOStoredProcIzmenDiscipl: TADOStoredProc;
+    ADOQueryIzmenPrepod: TADOQuery;
+    DataSourceIzmenPrepod: TDataSource;
+    ADOStoredProcIzmenPrepod: TADOStoredProc;
+    ADOQueryIzmenGrupp: TADOQuery;
+    DataSourceIzmenGrupp: TDataSource;
+    ADOStoredProcIzmenGrupp: TADOStoredProc;
+    ADOQueryIzmenStud: TADOQuery;
+    DataSourceIzmenStud: TDataSource;
+    ADOStoredProcIzmenStud: TADOStoredProc;
+    ADOQueryIzmenNagruzka: TADOQuery;
+    DataSourceIzmenNagruzka: TDataSource;
+    ADOStoredProcIzmenNagruzka: TADOStoredProc;
+    DataSourceVvodNagruzki: TDataSource;
+    ADOStoredProcVvodNagruzki: TADOStoredProc;
+    ADOQueryVvodNagruzki: TADOQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDM: TFDM;
+
+implementation
+
+uses FMenu, VvodDiscipl, VvodGrupp, VvodPrepod, VvodSpec, VvodStud;
+
+{$R *.dfm}
+
+end.

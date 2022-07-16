@@ -1,0 +1,26 @@
+unit Svod_Otch_o_prop_zan_po_Discip_v_gr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TFSvod_Otch_o_prop_zan_po_Discip_v_gr = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FSvod_Otch_o_prop_zan_po_Discip_v_gr: TFSvod_Otch_o_prop_zan_po_Discip_v_gr;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+end.

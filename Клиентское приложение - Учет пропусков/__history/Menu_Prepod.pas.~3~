@@ -1,0 +1,26 @@
+unit Menu_Prepod;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls;
+
+type
+  TFMenu_Prepod = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FMenu_Prepod: TFMenu_Prepod;
+
+implementation
+
+{$R *.dfm}
+
+end.
